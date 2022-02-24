@@ -15,7 +15,10 @@ class Form extends React.Component {
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick } = this.props;
-
+    // REQUISITO 1: Eu criei o <form>, dentro dele coloquei as tags textarea e input, que a questão pediu, sendo que eles devem estar dentro do label. O label deve ter o hmtlFor igual ao id da tag filha.Criei também o button para salvar o conteúdo digitado. Sempre que tem props, precisa validar com proptype.
+    // REQUISITO 2: Antes de tudo, desestruturei a props, depois coloquei a props como valor do value. E coloquei a prop onInputChange como valor do evento onChange, ou seja, a cada mudança que houver nos inputs, vai ativar a função prop onInputChange.
+    // Prop são informações que podem ser passadas para outros componentes, podendo ser string, número, função...
+    // REQUISITO 4: Tive que trocar o name para o nome das props.
     return (
       <form>
         <label htmlFor="name-input">

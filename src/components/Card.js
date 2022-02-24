@@ -14,7 +14,7 @@ class Card extends React.Component {
       cardTrunfo,
 
     } = this.props;
-
+    // REQUISITO 3: Antes de tudo, desestruturei os props. Coloquei as props para serem exibidas nas tags. A última parte eu coloquei entre {} porque é uma função, que diz que: o cardTrunfo for true? Se sim, coloque o texto Super Trunfo na tag. Se não, não coloque nada. No fim, validei todas as props.
     return (
       <>
         <h2 data-testid="name-card">{ cardName }</h2>
@@ -30,7 +30,7 @@ class Card extends React.Component {
     );
   }
 }
-
+// Configurar uma prop como obrigatória é muito útil quando o componente é dependente de uma propriedade passada por seu componente pai e não irá funcionar sem ela.
 Card.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
