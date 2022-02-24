@@ -21,6 +21,11 @@ class App extends React.Component {
     this.state = INITIAL_STATE;
   }
 
+  // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
+  onSaveButtonClick = () => {
+    this.setState(INITIAL_STATE);
+  }
+
   // Eu segui o exemplo da última aula do Braddock
   // REQUISITO 4: A cada mudança feita nos inputs, precisa ativar a função onInputChange. O bind(this) é necessário para que, dentro da função possamos usar o this, se referindo ao componente. Caso contrário, o this será undefined dentro da função e o setState não funcionará. Porém usei o arrow function, por isso que não precisei usar o bind. Destruturei o event.target no argumento da função.
   // Para atualizar o state desse componente, usei o this.setState, ou seja, a cada alteração do texto do input, o event.target.name(que pode ser por exemplo o carName) vai receber o seu valor.
@@ -31,7 +36,7 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [name]: value });
   }
-  // REQUISITO 4: Desestrututei o this.state e linkei o state com os componentes filho (Form e Card). Exemplo: cardName={ cardName } quer dizer que o value = cardName usado no Form será atualizado pelo state. O state feito no App é igual ao value={cardName}. Esse {cardName} vai ser passado como valor do prop cardName para ser atualizado com sobre o que estiver sendo digitado no input. Ou seja, cardName={ cardName }, o 1º cardName é a prop e o 2º cardName é o cardName que está no value={cardName} que está no Form e ques está sendo sendo atualizado no App.
+  // REQUISITO 4: Desestrututei o this.state e linkei o state com os componentes filho (Form e Card). Exemplo: cardName={ cardName } quer dizer que o value = cardName usado no Form será atualizado pelo state. O state feito no App é igual ao value={cardName}. Esse {cardName} vai ser passado como valor do prop cardName para ser atualizado com sobre o que estiver sendo digitado no input. Ou seja, cardName={ cardName }, o 1º cardName é a prop e o 2º cardName é o cardName que está no value={cardName} que está no Form e ques está sendo sendo atualizado no App
   // Como o onInputChange não teve estado inicial, precisei colocar o this, para se referir ao componente.
 
   render() {
@@ -49,6 +54,7 @@ class App extends React.Component {
         <h1>Tryunfo</h1>
         {/* Eu segui o último exercício do course */}
         <Form
+          onSaveButtonClick={ this.onSaveButtonClick }
           onInputChange={ this.onInputChange }
           cardName={ cardName }
           cardImage={ cardImage }
