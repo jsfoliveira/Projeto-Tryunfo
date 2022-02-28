@@ -22,6 +22,8 @@ class App extends React.Component {
     this.state = INITIAL_STATE;
   }
 
+  // REQUISITO 8 - parte 1: Desestruturei as props. Criei uma const card para guardr só as props que vou querer usar. Botei dentro do setState uma função como parâmtro. Adicionei o card dentro do array mostrarLista.
+  // Tive ajuda do Murilo Costa.
   addNewCard = () => {
     const {
       cardName,
@@ -51,7 +53,7 @@ class App extends React.Component {
   }
 
   // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
-  // REQUISIOTO 8
+  // REQUISIOTO 8 - parte 2: chamei a função addNewCard dentro da onSaveButtonClick.
   onSaveButtonClick = (event) => {
     event.preventDefault();
     this.addNewCard();
