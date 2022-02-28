@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   cardAttr3: '0',
   cardRare: 'normal',
   cardTrunfo: false,
+  hasTrunfo: false,
   isSaveButtonDisabled: true,
   mostrarLista: [],
 };
@@ -20,6 +21,15 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = INITIAL_STATE;
+  }
+
+  // REQUISITO 7 - parte 1: O hasTrunfo inicialmente deve ser false. Se o cardtrunfo (que é a caixa de checkbox) for true (que é ter o checkbox mostrando), então o hastrunfo deve ser true.
+  superTrunfo = () => {
+    const { cardTrunfo } = this.setState;
+    if (cardTrunfo) {
+      return this.state({
+        hasTrunfo: true,
+      });
   }
 
   // REQUISITO 8 - parte 1: Desestruturei as props. Criei uma const card para guardr só as props que vou querer usar. Botei dentro do setState uma função como parâmtro. Adicionei o card dentro do array mostrarLista.
@@ -69,6 +79,7 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
     });
+    this.superTrunfo();
   }
 
   // REQUISITO 5: Quando a página é carregada, o button fica disabled. O disabled recebe essa função como prop isSaveButtonDisabled, que só vai habilitar quando passar por todos os requisitos. Fiz uma variável para guardar quando o form for válido(formValido). Fiz todas as condicionais com false, porque são asc condições do botão ficar desabilitado.
@@ -130,11 +141,6 @@ class App extends React.Component {
     // this.validateForm vai adicionando no setState, peguei a ideia na mentoria.
     this.setState({ [name]: value }, this.validateForm);
   }
-  // REQUISITO 7
-  // superTrunfo = () => {
-  //   const { cardTrunfo } = this.setState;
-  //   cardTrunfo.checked
-  // }
 
   // REQUISITO 4: Desestrututei o this.state e linkei o state com os componentes filho (Form e Card). Exemplo: cardName={ cardName } quer dizer que o value = cardName usado no Form será atualizado pelo state. O state feito no App é igual ao value={cardName}. Esse {cardName} vai ser passado como valor do prop cardName para ser atualizado com sobre o que estiver sendo digitado no input. Ou seja, cardName={ cardName }, o 1º cardName é a prop e o 2º cardName é o cardName que está no value={cardName} que está no Form e ques está sendo sendo atualizado no App
   // Como o onInputChange não teve estado inicial, precisei colocar o this, para se referir ao componente.
@@ -151,6 +157,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       mostrarLista,
+      hasTrunfo,
     } = this.state;
     return (
       <div>
@@ -167,6 +174,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          hasTrunfo={ hasTrunfo }
         />
         <Card
           onInputChange={ this.onInputChange }

@@ -12,6 +12,7 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick } = this.props;
@@ -102,14 +103,18 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="supertrunfo">
-          <input
-            type="checkbox"
-            data-testid="trunfo-input"
-            id="supertrunfo"
-            name="cardTrunfo"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
+          {/* REQUISITO 7 - parte 2: Se tiver marcado o cardtrunfoalguma vez, o hastrunfo é false, então aparece o input todo, caso contrário o hastrunfo é true (!hastrunfo), então aparecerá a mensagem. Tive auxílio do colega Murilo Costa. */}
+          {
+            !hasTrunfo ? <input
+              type="checkbox"
+              data-testid="trunfo-input"
+              id="supertrunfo"
+              name="cardTrunfo"
+              checked={ cardTrunfo }
+              onChange={ onInputChange }
+            />
+              : <p>Você já tem um Super Trunfo em seu baralho</p>
+          }
         </label>
 
         <button
@@ -135,6 +140,7 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
