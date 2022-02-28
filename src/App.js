@@ -22,10 +22,7 @@ class App extends React.Component {
     this.state = INITIAL_STATE;
   }
 
-  // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
-  // REQUISIOTO 8
-  onSaveButtonClick = (event) => {
-    event.preventDefault();
+  addNewCard = () => {
     const {
       cardName,
       cardImage,
@@ -35,7 +32,6 @@ class App extends React.Component {
       cardAttr3,
       cardRare,
       cardTrunfo,
-      mostrarLista,
     } = this.state;
 
     const card = {
@@ -47,14 +43,30 @@ class App extends React.Component {
       cardAttr3,
       cardRare,
       cardTrunfo,
-      mostrarLista,
     };
 
     this.setState((estadoAnterior) => ({
       mostrarLista: [...estadoAnterior.mostrarLista, card],
     }));
+  }
 
-    this.setState(INITIAL_STATE);
+  // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
+  // REQUISIOTO 8
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    this.addNewCard();
+
+    this.setState({
+      cardName: '',
+      cardImage: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+    });
   }
 
   // REQUISITO 5: Quando a página é carregada, o button fica disabled. O disabled recebe essa função como prop isSaveButtonDisabled, que só vai habilitar quando passar por todos os requisitos. Fiz uma variável para guardar quando o form for válido(formValido). Fiz todas as condicionais com false, porque são asc condições do botão ficar desabilitado.
