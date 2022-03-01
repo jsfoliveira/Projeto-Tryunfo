@@ -15,26 +15,19 @@ const INITIAL_STATE = {
   isSaveButtonDisabled: true,
   mostrarLista: [],
 };
+// O name do state deve ser igual ao name do input.
 // REQUISITO 4: Para renderizar o texto digitado no input, precisa criar o state. State é igual a uma props, mas, ao invés de receber a informação e só utilizá-la (PROPS), o STATE é privado e é controlado pelo componente, por isso que coloquei no App. Para definir um state, precisa criar um constructor com o método super. No this.state eu atribui o valor inicial de cada prop.
-
 class App extends React.Component {
   constructor() {
     super();
     this.state = INITIAL_STATE;
   }
 
-  // REQUISITO 7 - parte 1: O hasTrunfo inicialmente deve ser false. Se o cardtrunfo (que é a caixa de checkbox) for true (que é ter o checkbox mostrando), então o hastrunfo deve ser true.
-  superTrunfo = () => {
-    const { cardTrunfo } = this.setState;
-    if (cardTrunfo) {
-      return this.state({
-        hasTrunfo: true,
-      });
-  }
-
-  // REQUISITO 8 - parte 1: Desestruturei as props. Criei uma const card para guardr só as props que vou querer usar. Botei dentro do setState uma função como parâmtro. Adicionei o card dentro do array mostrarLista.
-  // Tive ajuda do Murilo Costa.
-  addNewCard = () => {
+  // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    // REQUISITO 8: Desestruturei as props. Criei uma const card para guardar só as props que vou querer usar. Botei dentro do setState uma função como parâmetro. Adicionei o card dentro do array mostrarLista.
+    // Tive ajuda do Murilo Costa.
     const {
       cardName,
       cardImage,
@@ -58,17 +51,6 @@ class App extends React.Component {
     };
 
     this.setState((estadoAnterior) => ({
-      mostrarLista: [...estadoAnterior.mostrarLista, card],
-    }));
-  }
-
-  // REQUISITO 6: Após salvar, os inputs devem voltar ao seu state inicial.
-  // REQUISIOTO 8 - parte 2: chamei a função addNewCard dentro da onSaveButtonClick.
-  onSaveButtonClick = (event) => {
-    event.preventDefault();
-    this.addNewCard();
-
-    this.setState({
       cardName: '',
       cardImage: '',
       cardDescription: '',
@@ -78,8 +60,11 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-    });
-    this.superTrunfo();
+      mostrarLista: [...estadoAnterior.mostrarLista, card],
+    }));
+
+    // REQUISITO 7 - parte 1: O hasTrunfo inicialmente deve ser false. Se o cardtrunfo (que é a caixa de checkbox) for true (que é ter o checkbox mostrando), então o hastrunfo deve ser true.
+    if (cardTrunfo) this.setState({ hasTrunfo: true });
   }
 
   // REQUISITO 5: Quando a página é carregada, o button fica disabled. O disabled recebe essa função como prop isSaveButtonDisabled, que só vai habilitar quando passar por todos os requisitos. Fiz uma variável para guardar quando o form for válido(formValido). Fiz todas as condicionais com false, porque são asc condições do botão ficar desabilitado.
