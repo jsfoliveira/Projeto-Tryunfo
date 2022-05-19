@@ -1,15 +1,17 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Header from './components/Header';
+import './App.css';
 
 const INITIAL_STATE = {
   cardName: '',
   cardImage: '',
   cardDescription: '',
-  cardAttr1: '0',
-  cardAttr2: '0',
-  cardAttr3: '0',
-  cardRare: 'normal',
+  cardAttr1: '',
+  cardAttr2: '',
+  cardAttr3: '',
+  cardRare: '',
   cardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
@@ -145,47 +147,56 @@ class App extends React.Component {
       hasTrunfo,
     } = this.state;
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <Form
-          onSaveButtonClick={ this.onSaveButtonClick }
-          onInputChange={ this.onInputChange }
-          cardName={ cardName }
-          cardImage={ cardImage }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          onInputChange={ this.onInputChange }
-          cardName={ cardName }
-          cardImage={ cardImage }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        {/* REQUISITO 8 */}
-        { mostrarLista.map((element) => (
-          <Card
-            key={ element.cardName }
-            cardName={ element.cardName }
-            cardDescription={ element.cardDescription }
-            cardAttr1={ element.cardAttr1 }
-            cardAttr2={ element.cardAttr2 }
-            cardAttr3={ element.cardAttr3 }
-            cardImage={ element.cardImage }
-            cardRare={ element.cardRare }
-            cardTrunfo={ element.cardTrunfo }
-          />
-        )) }
+      <div className="container-principal">
+        <Header />
+        <div className="container">
+          <h1>Tryunfo</h1>
+          <div className="container_form">
+            <Form
+              onSaveButtonClick={ this.onSaveButtonClick }
+              onInputChange={ this.onInputChange }
+              cardName={ cardName }
+              cardImage={ cardImage }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              hasTrunfo={ hasTrunfo }
+            />
+          </div>
+          <div className="container_card">
+            <Card
+              onInputChange={ this.onInputChange }
+              cardName={ cardName }
+              cardImage={ cardImage }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
+        </div>
+        <div className="container_lista">
+          {/* REQUISITO 8 */}
+          { mostrarLista.map((element) => (
+            <Card
+              key={ element.cardName }
+              cardName={ element.cardName }
+              cardDescription={ element.cardDescription }
+              cardAttr1={ element.cardAttr1 }
+              cardAttr2={ element.cardAttr2 }
+              cardAttr3={ element.cardAttr3 }
+              cardImage={ element.cardImage }
+              cardRare={ element.cardRare }
+              cardTrunfo={ element.cardTrunfo }
+            />
+          )) }
+        </div>
       </div>
     );
   }

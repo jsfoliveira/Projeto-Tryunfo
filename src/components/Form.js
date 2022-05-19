@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../App.css';
 
 class Form extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class Form extends React.Component {
           <input
             type="text"
             data-testid="name-input"
+            id="name-input"
             name="cardName"
             value={ cardName }
             onChange={ onInputChange }
@@ -38,40 +40,43 @@ class Form extends React.Component {
           <textarea
             data-testid="description-input"
             name="cardDescription"
+            id="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
           />
         </label>
 
         <label htmlFor="attr1-input">
-          Atributo 1
+          Ataque
           <input
             type="number"
             data-testid="attr1-input"
             name="cardAttr1"
+            id="attr1-input"
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
         </label>
 
         <label htmlFor="attr2-input">
-          Atributo 2
+          Defesa
           <input
             type="number"
             data-testid="attr2-input"
             name="cardAttr2"
+            id="attr2-input"
             value={ cardAttr2 }
             onChange={ onInputChange }
           />
         </label>
 
         <label htmlFor="third">
-          Atributo 3
+          Velocidade
           <input
             type="number"
             data-testid="attr3-input"
-            id="third"
             name="cardAttr3"
+            id="third"
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
@@ -83,6 +88,7 @@ class Form extends React.Component {
             type="text"
             data-testid="image-input"
             name="cardImage"
+            id="image-input"
             value={ cardImage }
             onChange={ onInputChange }
           />
@@ -93,6 +99,7 @@ class Form extends React.Component {
           <select
             data-testid="rare-input"
             name="cardRare"
+            id="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
           >
@@ -102,8 +109,9 @@ class Form extends React.Component {
           </select>
         </label>
 
-        <label htmlFor="supertrunfo">
-          {/* REQUISITO 7 - parte 2: Se tiver marcado o cardtrunfoalguma vez, o hastrunfo é false, então aparece o input todo, caso contrário o hastrunfo é true (!hastrunfo), então aparecerá a mensagem. Tive auxílio do colega Murilo Costa. */}
+        <label htmlFor="supertrunfo" id="checkbox">
+          <p>É super trunfo?</p>
+          {/* REQUISITO 7 - parte 2: Se tiver marcado o cardtrunfo alguma vez, o hastrunfo é false, então aparece o input todo, caso contrário o hastrunfo é true (!hastrunfo), então aparecerá a mensagem. Tive auxílio do colega Murilo Costa. */}
           {
             !hasTrunfo ? <input
               type="checkbox"
@@ -115,17 +123,16 @@ class Form extends React.Component {
             />
               : <p>Você já tem um Super Trunfo em seu baralho</p>
           }
+          <button
+            type="submit"
+            id="save-button"
+            data-testid="save-button"
+            disabled={ isSaveButtonDisabled }
+            onClick={ onSaveButtonClick }
+          >
+            Salvar
+          </button>
         </label>
-
-        <button
-          type="submit"
-          data-testid="save-button"
-          disabled={ isSaveButtonDisabled }
-          onClick={ onSaveButtonClick }
-        >
-          Salvar
-        </button>
-
       </form>
     );
   }
